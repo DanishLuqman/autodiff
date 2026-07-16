@@ -12,7 +12,7 @@ TEST(arena_alignment) {
 
     CHECK((uintptr_t)p1 != NULL);
     CHECK((uintptr_t)p2 != NULL);
-    CHECK((uintptr_t)p2 - (uintptr_t)p1 == 16);
+    CHECK((uintptr_t)p2 - (uintptr_t)p1 == 16); // pointer arithmetic
 
     arena_free(&a);
 }
