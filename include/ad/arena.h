@@ -4,9 +4,9 @@
 #include <stddef.h>
 
 typedef struct{
-    unsigned char *size;
-    size_t offset;
-    size_t capacity;
+    unsigned char *base; // unsigned char to get pointer in 1 byte increment
+    size_t offset; // how many bytes are used
+    size_t capacity; //how many bytes exist.
 } Arena;
 
 void arena_init(Arena *a, size_t capacity);
