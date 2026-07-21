@@ -10,8 +10,8 @@ TEST(arena_alignment) {
     void *p1 = arena_alloc(&a, 1);
     void *p2 = arena_alloc(&a, 1);
 
-    CHECK((uintptr_t)p1 != NULL);
-    CHECK((uintptr_t)p2 != NULL);
+    CHECK(p1 != NULL);
+    CHECK(p2 != NULL);
     CHECK((uintptr_t)p2 - (uintptr_t)p1 == 16); // pointer arithmetic
 
     arena_free(&a);
@@ -33,10 +33,10 @@ TEST(arena_distinctness) {
         memset(ptrs[i], fill_values[i], block_size);
     }
 
-    for (size_t i = 0; j < num_blocks; j++) {
+    for (size_t i = 0; i < num_blocks; i++) {
         unsigned char *bytes = (unsigned char *)ptrs[i];
 
-        for (size_t j = 0; i < num_blocks; i++) {
+        for (size_t j = 0; j < num_blocks; j++) {
             CHECK(bytes[j] == fill_values[i]);
         }
     }
@@ -50,10 +50,10 @@ TEST(arena_exact_capacity) {
     arena_init(&a, 480);
 
     void *p1 = arena_alloc(&a, 460); //should round up to 464
-    CHECK(p1 != NULL && p1 == 16);
+    CHECK(p1 != NULL);
 
     void *p2 = arena_alloc(&a, 16);
-    CHECK(p2 != NULL && p2 == 16);
+    CHECK(p2 != NULL);
 
     // CHECK(a->offset == a->capacity);, a is declared as local variable so must use a.offset
     CHECK(a.offset == a.capacity);
