@@ -17,10 +17,13 @@ extern int ad_current_failed;
 
 void ad_register(const char *name, TestFn fn);
 
-#define TEST(name) \ // registers a test
+// registers a test
+// marks a function to run automatically before main
+// register_##name merges token together
+#define TEST(name) \ 
     static void name(void); \
-    __attribute__((constructor)) \ // marks a function to run automatically before main
-    static void register_##name(void) { ad_register(#name, name); } \  // register_##name merges tokens together
+    __attribute__((constructor)) \ 
+    static void register_##name(void) { ad_register(#name, name); } \  
     static void name(void) \
 
 #define CHECK(cond) \

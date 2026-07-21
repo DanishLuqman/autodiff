@@ -1,6 +1,7 @@
 #include "ad/arena.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 #define AD_ARENA_ALIGN 16
 #define AD_ARENA_ALIGN_UP(size) (((size) + (AD_ARENA_ALIGN - 1)) & ~((size_t)AD_ARENA_ALIGN - 1))
